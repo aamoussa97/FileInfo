@@ -1,15 +1,14 @@
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import FileInfo from "./components/FileInfo";
+import NavigationBar from "./components/NavigationBar";
 
-const App = () => {
+const App: React.FC = () => {
     return(
         <div>
-            <h2>Hello from React!</h2>
+            <NavigationBar/>
+            <FileInfo/>
         </div>
-    )
+    );
 }
 
-function render() {
-    ReactDOM.render(App(), document.body);
-}
-
-render();
+export default App;
