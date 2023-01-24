@@ -1,18 +1,35 @@
 import {
+    AppstoreOutlined,
+    HomeOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined,
+    MenuUnfoldOutlined, MoreOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import {Button, Layout, Menu, theme} from 'antd';
 import React, {useState} from "react";
 import FileInfo from "./FileInfo";
 import DragAndDrop from "./DragAndDrop";
 
 const { Header, Sider, Content } = Layout;
-const NavigationBar: React.FC = (props) => {
+
+interface AppProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    isDarkMode: boolean;
+}
+
+const NavigationBar: React.FC<AppProps> = (props) => {
     const [collapsed, setCollapsed] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(props.isDarkMode);
+
+    const [fileList, setFileList] = useState<File[]>([]);
+
+    const handleFileListChange = (callback) => {
+        console.log('callback');
+        console.log(callback);
+
+        setFileList(callback);
+    }
 
     return(
         <Layout>
@@ -25,18 +42,13 @@ const NavigationBar: React.FC = (props) => {
                     items={[
                         {
                             key: '1',
-                            icon: <UserOutlined />,
-                            label: 'nav 1',
+                            icon: <HomeOutlined />,
+                            label: 'Home',
                         },
                         {
                             key: '2',
-                            icon: <VideoCameraOutlined />,
-                            label: 'nav 2',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
+                            icon: <AppstoreOutlined />,
+                            label: 'Settings',
                         },
                     ]}
                 />
@@ -55,8 +67,8 @@ const NavigationBar: React.FC = (props) => {
                         background: '#FFFFFF',
                     }}
                 >
-                    <FileInfo/>
-                    <DragAndDrop/>
+                    <FileInfo fileList={fileList}/>
+                    <DragAndDrop fileList={fileList} handleFileListChange={handleFileListChange}/>
                 </Content>
             </Layout>
         </Layout>
