@@ -7,6 +7,8 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import React, {useState} from "react";
+import FileInfo from "./FileInfo";
+import DragAndDrop from "./DragAndDrop";
 
 const { Header, Sider, Content } = Layout;
 const NavigationBar: React.FC = (props) => {
@@ -17,7 +19,7 @@ const NavigationBar: React.FC = (props) => {
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo" />
                 <Menu
-                    theme="dark"
+                    theme="light"
                     mode="inline"
                     defaultSelectedKeys={['1']}
                     items={[
@@ -40,7 +42,7 @@ const NavigationBar: React.FC = (props) => {
                 />
             </Sider>
             <Layout className="site-layout">
-                <Header style={{ padding: 0, background: '#1560BD' }}>
+                <Header style={{ padding: 0, marginLeft: 15, background: '#FFFFFF' }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
@@ -50,11 +52,11 @@ const NavigationBar: React.FC = (props) => {
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        minHeight: 280,
-                        background: '#1560BD',
+                        background: '#FFFFFF',
                     }}
                 >
-                    Content
+                    <FileInfo/>
+                    <DragAndDrop/>
                 </Content>
             </Layout>
         </Layout>
